@@ -13,6 +13,7 @@
 		E66414ED1D06071E0088642E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E66414EB1D06071E0088642E /* Main.storyboard */; };
 		E66414EF1D06071E0088642E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E66414EE1D06071E0088642E /* Assets.xcassets */; };
 		E66414F21D06071E0088642E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E66414F01D06071E0088642E /* LaunchScreen.storyboard */; };
+		E66414FB1D06090C0088642E /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = E66414FA1D06090C0088642E /* Card.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		E66414EE1D06071E0088642E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E66414F11D06071E0088642E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E66414F31D06071E0088642E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E66414F91D06090C0088642E /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
+		E66414FA1D06090C0088642E /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +65,8 @@
 				E66414E61D06071E0088642E /* AppDelegate.m */,
 				E66414E81D06071E0088642E /* ViewController.h */,
 				E66414E91D06071E0088642E /* ViewController.m */,
+				E66414F91D06090C0088642E /* Card.h */,
+				E66414FA1D06090C0088642E /* Card.m */,
 				E66414EB1D06071E0088642E /* Main.storyboard */,
 				E66414EE1D06071E0088642E /* Assets.xcassets */,
 				E66414F01D06071E0088642E /* LaunchScreen.storyboard */,
@@ -152,6 +157,7 @@
 				E66414EA1D06071E0088642E /* ViewController.m in Sources */,
 				E66414E71D06071E0088642E /* AppDelegate.m in Sources */,
 				E66414E41D06071E0088642E /* main.m in Sources */,
+				E66414FB1D06090C0088642E /* Card.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

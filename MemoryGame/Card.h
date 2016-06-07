@@ -18,7 +18,12 @@
 
 
 @interface Card : UIImageView
+@property BOOL isLocked;
 @property BOOL isFlipped;
 @property UIImage *cardImage;
+@property (nonatomic) NSString *cardName;
 @property (nonatomic,weak) id<CardDelegate> delegate;
+
+- (void)showCard;
+- (void)hideCard;
 @end

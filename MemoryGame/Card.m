@@ -21,8 +21,31 @@
     return self;
 }
 
--(void)handleTap:(UITapGestureRecognizer *)recognizer{
+- (void)setCardName:(NSString *)cardName{
+    _cardName = cardName;
+    self.cardImage = [UIImage imageNamed:cardName];
+}
+
+- (void)handleTap:(UITapGestureRecognizer *)recognizer{
     [self.delegate didTapCard:self];
 }
 
+//- (void)showCard{
+//    [UIView animateWithDuration:0.8 animations:^{
+//        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self cache:YES];
+//        [self setImage:self.cardImage];
+//    }];
+//    self.isFlipped = !self.isFlipped;
+//}
+//
+//- (void)hideCard{
+//    [UIView transitionWithView:self
+//                      duration:0.8
+//                       options:UIViewAnimationOptionTransitionFlipFromLeft
+//                    animations: ^{
+//                        [self setImage:[UIImage imageNamed:@"back"]];
+//                    }
+//                    completion:NULL];
+//    self.isFlipped = !self.isFlipped;
+//}
 @end

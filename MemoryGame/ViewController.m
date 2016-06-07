@@ -13,7 +13,9 @@
 @property (nonatomic,strong) IBOutletCollection(Card) NSArray *cards;
 @property NSArray *cardValueArray;
 @property NSArray *cardFaceArray;
-@property NSMutableSet *pairTest;
+@property Card *card1;
+@property Card *card2;
+@property BOOL isSecondCard;
 @end
 
 @implementation ViewController
@@ -46,40 +48,81 @@
     }
     
     for(int i = 0; i < 16; i++){
-        UIImage *image = [UIImage imageNamed:randomLocations[i]];
-        [self.cards[i] setCardImage:image];
+        [self.cards[i] setCardName:randomLocations[i]];
         [self.cards[i] setImage:[UIImage imageNamed:@"back"]];
     }
     for (Card *card in self.cards) {
+        card.isLocked = NO;
+        card.isFlipped = NO;
         card.delegate = self;
     }
     
 }
 
 -(void)didTapCard:(Card *)card{
-    if (!card.isFlipped){
-        [UIView animateWithDuration:0.8 animations:^{
-            [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:card cache:YES];
-            [card setImage:card.cardImage];
-        }];
-        if ([self.pairTest count] == 0) {
-            [self.pairTest addObject:card];
-        } else if ([self.pairTest count] == 1) {
-            [self.pairTest addObject:card];
-        }else{
-            
-        }
-        
-    }else if (card.isFlipped) {
-        [UIView transitionWithView:card
-                          duration:0.8
-                           options:UIViewAnimationOptionTransitionFlipFromLeft
-                        animations: ^{
-                            [card setImage:[UIImage imageNamed:@"back"]];
-                        }
-                        completion:NULL];
+    if (!card.isFlipped && !card.isLocked){
+        [self showCard:card];
     }
+}
+
+- (void)showCard:(Card *)card{
+    [UIView animateWithDuration:0.8 animations:^{
+        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:card cache:YES];
+        [card setImage:card.cardImage];
+    } completion:^(BOOL finished) {
+        if(finished == YES){
+            if(!self.isSecondCard){
+                self.card1 = card;
+                self.isSecondCard = YES;
+            }else{
+                self.card2 = card;
+                if ([self.card1.cardName isEqualToString:self.card2.cardName]) {
+                    self.card1.isLocked = YES;
+                    self.card2.isLocked = YES;
+                    if([self didCompleteGame]){
+                        [self newGame];
+                    }
+                }else{
+                    [self hideCard:self.card1];
+                    [self hideCard:self.card2];
+                }
+                self.isSecondCard = NO;
+            }
+        }
+    }];
     
     card.isFlipped = !card.isFlipped;
+}
+
+- (void)hideCard:(Card *)card{
+    [UIView animateWithDuration:0.8 animations:^{
+        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:card cache:YES];
+        [card setImage:[UIImage imageNamed:@"back"]];
+    } completion:^(BOOL finished) {
+        if(finished == YES){
+            NSLog(@"DONE");
+        }
+    }];
+    
+    card.isFlipped = !card.isFlipped;
+}
+
+- (BOOL)didCompleteGame{
+    for (Card *card in self.cards) {
+        if(!card.isLocked){
+            return NO;
+        }
+    }
+    return YES;
+}
+
+-(void)newGame{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"New game?" message:@"Congratulations! Would you like to start a new game?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"YES!" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self shuffleCards];
+    }];
+    [alert addAction:action];
+    [self presentViewController:alert animated:YES completion:nil];
+    
 }
 @end
